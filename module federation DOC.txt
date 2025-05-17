@@ -1,0 +1,53 @@
+
+create a MFE project:
+
+step 1: create workspace
+command:ng new workspace --create-application="false"
+
+step 2: create a folder named projects inside the workspace
+
+step 3: create host and mfe projects inside projects folder
+command: ng g application host --routing=true --style=css
+         ng g application mfe  --routing=true --style=css
+
+step 4: npm i @angular-architects/module-federation@latest --- if u use latest angular cli 
+					(or)
+	  npm i @angular-architects/module-federation@~14.3.2 --- give like this version specific of ur angular version, if ur not using latest angular
+
+NOTE:always ensure which angular module federation version is acception or in console it'll throw 
+"CLI only compatible in this angular version x.x but found y.y" such error will be thrown , remember at that time ,
+ angular mfe version needs to be the perfect version which will compile in ur local machine's angular version       
+
+step 5: add module federations for each projects
+command: ng add @angular-architects/module-federation --project=host ---> it'll ask for port number : give 4200 (or) as ur wish
+command: ng add @angular-architects/module-federation --project=mfe ---> it'll ask for port number : give 4201 (or) as ur wish
+        
+
+step 6: add feature modules for the projects
+command: ng g m host-feature --routing
+         ng g m mfe-feature --routing
+
+step 7: ng serve host
+        ng serve mfe
+
+
+
+
+in our airexportworkspace project
+start with step 3
+After step 3 do step 4 only if angular mfe is not installed , if already installed straightly go to step 5
+ 
+while during step 5
+CONDITIONS MIGHT ARISE WHILE DOING STEP 5
+1. an error will come saying angular schematics is missing ,
+then add : npm install @schematics/angular@~14.2.10 and re-try step 5 "add module federation to the project" 
+note:if latest version of angular is used , do not need to specify the version in the abouve command just put "@latest"
+
+2.after the above error and if another new error saying devkit missing comes add this command 
+npm install @angular-devkit/schematics@~14.2.10 and then re-try step 5 "add module federation to the project"
+ note:if latest version of angular is used , do not need to specify the version in the abouve command just put "@latest"
+
+
+
+
+
